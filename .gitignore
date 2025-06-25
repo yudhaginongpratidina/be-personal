@@ -1,0 +1,7 @@
+# FOLDERS
+node_modules/
+logs/
+
+# FILES
+.env
+/generated/prisma
