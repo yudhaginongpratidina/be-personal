@@ -16,6 +16,6 @@ const HOST = process.env.HOSTNAME || 'localhost';
 // ===============================================================================
 // SERVER LISTEN
 // ===============================================================================
-APP.listen(PORT, HOST, () => {
+APP.listen(PORT, () => {
     logger.info(`Server is running on http://${HOST}:${PORT}`);
 });
