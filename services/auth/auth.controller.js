@@ -28,7 +28,8 @@ export default class AuthController {
             res.cookie('refresh_token', refresh_token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
+                sameSite: 'lax',
+                path: '/'
             });
 
             return res.status(200).json({ message: 'login success', token: access_token });
