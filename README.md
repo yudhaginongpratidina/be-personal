@@ -45,7 +45,7 @@ pnpm prisma db push
 
 ```bash
 docker build -t express/be-personal:latest .
-docker run -p <port>:<port> express/be-personal:latest
+docker run -d --name be-personal -p <port>:<port> express/be-personal:latest
 ```
 
 ## Enpoints
