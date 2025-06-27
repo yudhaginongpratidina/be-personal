@@ -24,7 +24,7 @@ API.get("/", WellcomeController.index);
 
 API.post("/auth/register", AuthController.register);
 API.post("/auth/login", AuthController.login);
-API.post("/auth/refresh-token", AuthController.refresh_token);
+API.post("/auth/token", AuthController.refresh_token);
 API.post("/auth/logout", AuthController.logout);
 
 

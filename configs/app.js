@@ -27,7 +27,11 @@ const APP = express();
 // ===============================================================================
 // MIDDLEWARE
 // ===============================================================================
-APP.use(cors());
+APP.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+    methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS']
+}));
 APP.use(express.json());
 APP.use(cookieParser());
 APP.use(express.urlencoded({ extended: true }));

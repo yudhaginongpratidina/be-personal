@@ -22,7 +22,7 @@ export default class AuthService {
         if (!find) throw new ResponseError(404, "user not found");
 
         const password = await comparePassword(data.password, find.hash_password);
-        if (!password) throw new ResponseError(401, "invalid password");
+        if (!password) throw new ResponseError(401, "wrong password");
 
         const response = await generateToken(find.id, find.name, find.email);
         return response;
