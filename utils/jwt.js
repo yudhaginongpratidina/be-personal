@@ -160,7 +160,6 @@ export const refreshAccessToken = async (refreshToken) => {
             id: decoded.id,
             name: decoded.name,
             email: decoded.email,
-            role: decoded.role
         };
         
         // Generate new access token only
@@ -191,32 +190,3 @@ export const refreshAccessToken = async (refreshToken) => {
         throw new Error(`Token refresh failed: ${error.message}`);
     }
 };
-
-export const blacklistToken = async (token, blacklistStorage) => {
-    try {
-        const decoded = await decodeToken(token);
-        const expiry = decoded.exp;
-        
-        // Store JTI in blacklist with expiry time
-        await blacklistStorage(decoded.jti, expiry);
-        
-        return true;
-    } catch (error) {
-        throw new Error(`Token blacklist failed: ${error.message}`);
-    }
-};
-
-
-export const isTokenBlacklisted = async (token, checkBlacklistStorage) => {
-    try {
-        const decoded = jwt.decode(token);
-        if (!decoded || !decoded.jti) return false;
-        
-        return await checkBlacklistStorage(decoded.jti);
-    } catch (error) {
-        return false;
-    }
-};
-
-
-export { JWT_CONFIG };

@@ -1,6 +1,7 @@
 // ===============================================================================
 // DEPENDENCIES
 // ===============================================================================
+import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 
@@ -28,6 +29,7 @@ const APP = express();
 // ===============================================================================
 APP.use(cors());
 APP.use(express.json());
+APP.use(cookieParser());
 APP.use(express.urlencoded({ extended: true }));
 
 
