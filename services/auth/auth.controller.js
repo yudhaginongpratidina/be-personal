@@ -29,6 +29,7 @@ export default class AuthController {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'lax',
+                domain: process.env.DOMAIN,
                 path: '/'
             });
 
