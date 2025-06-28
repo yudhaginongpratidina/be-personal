@@ -62,12 +62,19 @@ export default class AuthController {
 
     static async logout(req, res, next) {
         try {
-            const refresh_token = req.cookies.refresh_token;
-            if (!refresh_token) { throw new ResponseError(401, 'refresh token required') }
+            // Ambil semua cookie yang ada
+            const cookies = req.cookies;
 
-            res.clearCookie('refresh_token');
-            res.clearCookie('authenticated');
-            res.json({ message: 'Logout successful' });
+            if (!cookies || Object.keys(cookies).length === 0) {
+                throw new ResponseError(401, 'No cookies found');
+            }
+
+            // Hapus semua cookie satu per satu
+            Object.keys(cookies).forEach(cookieName => {
+                res.clearCookie(cookieName, { path: '/' });
+            });
+
+            res.json({ message: 'Logout successful, all cookies cleared' });
         } catch (error) {
             next(error);
         }
