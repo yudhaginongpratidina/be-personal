@@ -62,19 +62,25 @@ export default class AuthController {
 
     static async logout(req, res, next) {
         try {
-            // Ambil semua cookie yang ada
-            const cookies = req.cookies;
+            const authenticated = req.cookies.authenticated;
 
-            if (!cookies || Object.keys(cookies).length === 0) {
-                throw new ResponseError(401, 'No cookies found');
+            if (!authenticated) { throw new ResponseError(401, 'unauthenticated')}
+
+            const cookieOptions = {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'lax',
+                path: '/',
+            };
+
+            if (process.env.NODE_ENV === 'production' && process.env.DOMAIN) {
+                cookieOptions.domain = process.env.DOMAIN;
             }
 
-            // Hapus semua cookie satu per satu
-            Object.keys(cookies).forEach(cookieName => {
-                res.clearCookie(cookieName, { path: '/' });
-            });
+            res.clearCookie('refresh_token', cookieOptions);
+            res.clearCookie('authenticated', cookieOptions);
 
-            res.json({ message: 'Logout successful, all cookies cleared' });
+            res.json({ message: 'Logout successful' });
         } catch (error) {
             next(error);
         }
