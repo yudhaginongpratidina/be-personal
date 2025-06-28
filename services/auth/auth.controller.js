@@ -37,6 +37,7 @@ export default class AuthController {
             }
 
             res.cookie('refresh_token', refresh_token, cookieOptions);
+            res.cookie('authenticated', true, cookieOptions);
 
             return res.status(200).json({ message: 'login success', token: access_token });
         } catch (error) {
@@ -46,7 +47,10 @@ export default class AuthController {
 
     static async refresh_token(req, res, next) {
         try {
+            const authenticated = req.cookies.authenticated;
             const refresh_token = req.cookies.refresh_token;
+
+            if (!authenticated) { throw new ResponseError(401, 'unauthenticated') }
             if (!refresh_token) { throw new ResponseError(401, 'refresh token required') }
 
             const response = await AuthService.refresh_token(refresh_token);
@@ -62,6 +66,7 @@ export default class AuthController {
             if (!refresh_token) { throw new ResponseError(401, 'refresh token required') }
 
             res.clearCookie('refresh_token');
+            res.clearCookie('authenticated');
             res.json({ message: 'Logout successful' });
         } catch (error) {
             next(error);
