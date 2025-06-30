@@ -24,7 +24,11 @@ export default class AuthService {
         const password = await comparePassword(data.password, find.hash_password);
         if (!password) throw new ResponseError(401, "wrong password");
 
-        const response = await generateToken(find.id, find.name, find.email);
+        const user_payload = {
+            id: find.id
+        }
+
+        const response = await generateToken(user_payload);
         return response;
     }
 

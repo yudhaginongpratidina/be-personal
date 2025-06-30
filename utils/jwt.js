@@ -34,7 +34,7 @@ const generateJTI = () => {
 
 const sanitizePayload = (payload) => {
     const sanitized = {};
-    const allowedFields = ['id', 'name', 'email', 'role'];
+    const allowedFields = ['id', 'role'];
 
     for (const field of allowedFields) {
         if (payload[field] !== undefined && payload[field] !== null) {
@@ -70,7 +70,7 @@ export const generateToken = async (userPayload) => {
 
         // Refresh token payload (minimal data untuk security)
         const refreshTokenPayload = {
-            id: sanitizedPayload.id,
+            ...sanitizedPayload,
             iat: currentTime,
             jti: generateJTI(),
             type: 'refresh',
@@ -158,8 +158,6 @@ export const refreshAccessToken = async (refreshToken) => {
         // Get fresh user data (you might want to fetch from database)
         const userPayload = {
             id: decoded.id,
-            name: decoded.name,
-            email: decoded.email,
         };
         
         // Generate new access token only
