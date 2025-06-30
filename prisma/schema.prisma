@@ -8,6 +8,12 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum STATUS_MESSAGE {
+    PENDING
+    READ
+    RESOLVED
+}
+
 model User {
     id            String   @id @default(uuid())
     name          String
@@ -17,4 +23,16 @@ model User {
     updatedAt     DateTime @updatedAt
 
     @@map("users")
+}
+
+model Message {
+    id        String         @id @default(uuid())
+    full_name String
+    email     String
+    phone     String?
+    message   String
+    status    STATUS_MESSAGE @default(PENDING)
+    createdAt DateTime       @default(now())
+    updatedAt DateTime       @updatedAt
+    @@map("messages")
 }
