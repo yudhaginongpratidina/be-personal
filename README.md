@@ -50,13 +50,19 @@ docker run -d --name be-personal -p <port>:<port> express/be-personal:latest
 
 ## Enpoints
 
-| Name                  | Method    | Endpoint              | Request Type  |
-| --------------------- | --------- | --------------------- | ------------- |
-| Wellcome              | GET       | /                     | -             |
-| Register              | POST      | /auth/register        | req.body      |
-| Login                 | POST      | /auth/login           | req.body      |
-| Refresh Token         | POST      | /auth/token           | req.cookies   |
-| Logout                | POST      | /auth/logout          | req.cookies   |
+| Name                  | Method    | Endpoint              | Request Type              |
+| --------------------- | --------- | --------------------- | ------------------------- |
+| Wellcome              | GET       | /                     | -                         |
+|                       |           |                       |                           |
+| Register              | POST      | /auth/register        | req.body                  |
+| Login                 | POST      | /auth/login           | req.body                  |
+| Refresh Token         | POST      | /auth/token           | req.cookies               |
+| Logout                | POST      | /auth/logout          | req.cookies               |
+|                       |           |                       |                           |
+| Get Account           | GET       | /account              | req.token                 |
+| Update Info           | PATCH     | /account/info         | req.token, req.body       |
+| Update Password       | PATCH     | /account/password     | req.token, req.body       |
+| Delete Account        | DELETE    | /account              | req.token, req.body       |
 
 ## HTTP Status Code
 
