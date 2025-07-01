@@ -50,19 +50,24 @@ docker run -d --name be-personal -p <port>:<port> express/be-personal:latest
 
 ## Enpoints
 
-| Name                  | Method    | Endpoint              | Request Type              |
-| --------------------- | --------- | --------------------- | ------------------------- |
-| Wellcome              | GET       | /                     | -                         |
-|                       |           |                       |                           |
-| Register              | POST      | /auth/register        | req.body                  |
-| Login                 | POST      | /auth/login           | req.body                  |
-| Refresh Token         | POST      | /auth/token           | req.cookies               |
-| Logout                | POST      | /auth/logout          | req.cookies               |
-|                       |           |                       |                           |
-| Get Account           | GET       | /account              | req.token                 |
-| Update Info           | PATCH     | /account/info         | req.token, req.body       |
-| Update Password       | PATCH     | /account/password     | req.token, req.body       |
-| Delete Account        | DELETE    | /account              | req.token, req.body       |
+| Name                  | Method    | Endpoint              |
+| --------------------- | --------- | --------------------- |
+| Wellcome              | GET       | /                     |
+|                       |           |                       |
+| Register              | POST      | /auth/register        |
+| Login                 | POST      | /auth/login           |
+| Refresh Token         | POST      | /auth/token           |
+| Logout                | POST      | /auth/logout          |
+|                       |           |                       |
+| Get Account           | GET       | /account              |
+| Update Info           | PATCH     | /account/info         |
+| Update Password       | PATCH     | /account/password     |
+| Delete Account        | DELETE    | /account              |
+|                       |           |                       |
+| Send Message          | POST      | /messages             |
+| Get Messages          | GET       | /messages             |
+| Get Message           | GET       | /messages/:messageId  |
+| Delete Message        | DELETE    | /messages/:messageId  |
 
 ## HTTP Status Code
 

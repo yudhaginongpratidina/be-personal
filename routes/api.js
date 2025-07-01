@@ -10,6 +10,7 @@ import express from "express";
 import WellcomeController from "../services/wellcome/wellcome.controller.js";
 import AuthController from "../services/auth/auth.controller.js";
 import AccountController from "../services/account/account.controller.js";
+import MessageController from "../services/message/message.controller.js";
 
 
 // ===============================================================================
@@ -38,6 +39,12 @@ API.get("/account", AuthenticatedMiddleware, AccountController.getAccount);
 API.patch("/account/info", AuthenticatedMiddleware, AccountController.updateInfo);
 API.patch("/account/password", AuthenticatedMiddleware, AccountController.updatePassword);
 API.delete("/account", AuthenticatedMiddleware, AccountController.deleteAccount);
+
+API.post("/messages", MessageController.sendMessage);
+API.get("/messages", AuthenticatedMiddleware, MessageController.getMessages);
+API.get("/messages/:id", AuthenticatedMiddleware, MessageController.getMessage);
+API.patch("/messages/:id", AuthenticatedMiddleware, MessageController.updateStatusMessage);
+API.delete("/messages/:id", AuthenticatedMiddleware, MessageController.deleteMessage);
 
 
 // ===============================================================================
