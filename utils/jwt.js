@@ -3,7 +3,7 @@ import crypto from "crypto";
 import 'dotenv/config';
 
 const JWT_CONFIG = {
-    ACCESS_TOKEN_EXPIRY: '15m',
+    ACCESS_TOKEN_EXPIRY: '1m',
     REFRESH_TOKEN_EXPIRY: '7d',
     ALGORITHM: 'HS256',
     ISSUER: process.env.JWT_ISSUER || 'your-app-name',
