@@ -63,7 +63,6 @@ export default class AuthController {
     static async logout(req, res, next) {
         try {
             const authenticated = req.cookies.authenticated;
-
             if (!authenticated) { throw new ResponseError(401, 'unauthenticated')}
 
             const cookieOptions = {
